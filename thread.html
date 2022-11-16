@@ -61,6 +61,10 @@
         btn.addEventListener('click', function() {
             var name = document.getElementsByClassName("nameInput")[0];
             var txt = document.getElementsByClassName('commentInput')[0];
+
+            if(txt.value.length <= 0 || name.value.length <= 0)
+                return;
+
             var comment = {
                 content: txt.value,
                 date: Date.now(),
