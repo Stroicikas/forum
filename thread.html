@@ -7,7 +7,8 @@
     <div class="main">
         <div class="header">
         </div>
-        <textarea></textarea>
+        <textarea class="nameInput"></textarea>
+        <textarea class="commentInput"></textarea>
         <button>add comment</button>
         <div class="comments">
         </div>
@@ -58,11 +59,12 @@
 
         var btn = document.querySelector('button');
         btn.addEventListener('click', function() {
-            var txt = document.querySelector('textarea');
+            var name = document.getElementsByClassName("nameInput")[0];
+            var txt = document.getElementsByClassName('commentInput')[0];
             var comment = {
                 content: txt.value,
                 date: Date.now(),
-                author: 'Aaron'
+                author: name.value,
             }
             addComment(comment);
             txt.value = '';
@@ -84,7 +86,12 @@ h1, h4, ol {
 p {
     margin: 5px 0;
 }
-textarea {
+textarea.nameInput{
+    width: 100px;
+    height: 24px;
+    
+}
+textarea.commentInput {
     width: 80%;
     height: 80px;
 }
