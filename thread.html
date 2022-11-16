@@ -15,6 +15,19 @@
     </div>
     <script src="data.js"></script>
     <script>
+        String.prototype.isWhitespace = function()
+        {
+            var match = this.match(/\s*/);
+
+            if(match == null)
+            {
+                return false;
+            }
+            
+            return match[0] == this;
+        }
+
+
         var id = window.location.search.slice(1);
         var thread = threads.find(t => t.id == id);
         var header = document.querySelector('.header');
@@ -62,7 +75,16 @@
             var name = document.getElementsByClassName("nameInput")[0];
             var txt = document.getElementsByClassName('commentInput')[0];
 
-            if(txt.value.length <= 0 || name.value.length <= 0)
+            if(txt.value.length <= 0)
+                return;
+
+            if(txt.value.isWhitespace())
+                return;
+
+            if(name.value.length <= 0)
+                return;
+
+            if(name.value.isWhitespace())
                 return;
 
             var comment = {
