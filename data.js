@@ -56,21 +56,3 @@ if (localStorage && localStorage.getItem('threads')) {
     threads = defaultThreads;
     localStorage.setItem('threads', JSON.stringify(defaultThreads));
 }
-function addComment() {
-    var commentHtml = `
-        <div class="comment">
-            <div class="top-comment">
-                <p class="user">
-                    ${comment.author}
-                </p>
-                <p class="comment-ts">
-                    ${new Date(comment.date).toLocaleString()}
-                </p>
-            </div>
-            <div class="comment-content">
-                ${comment.content}
-            </div>
-        </div>
-    `
-    comments.insertAdjacentHTML('beforeend', commentHtml);
-}
