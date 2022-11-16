@@ -74,6 +74,10 @@
             txt.value = '';
             thread.comments.push(comment);
             localStorage.setItem('threads', JSON.stringify(threads));
+
+            var commentDiv = document.getElementsByClassName("comment-count")[0];
+            commentDiv.innerHTML = thread.comments.length + " comments";
+
         })
     </script>
 <style>
