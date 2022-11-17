@@ -9,7 +9,8 @@
         </div>
         <div><textarea placeholder="Enter your Name" class="nameInput"></textarea></div>
         <div><textarea placeholder="Enter your Comment" class="commentInput"></textarea></div>
-        <button>add comment</button>
+        <button>Add comment</button>
+        <button class="clr-button">Clear</button>
         <div class="comments">
         </div>
     </div>
@@ -69,6 +70,13 @@
         for (let comment of thread.comments) {
             addComment(comment);
         }
+
+        var clearBtn = document.getElementsByClassName("clr-button")[0];
+        clearBtn.addEventListener('click', function() {
+            localstorage.clear();
+            sessionStorage.clear();
+            location.reload();
+        })
 
         var btn = document.querySelector('button');
         btn.addEventListener('click', function() {
