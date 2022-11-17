@@ -1,3 +1,140 @@
+<!DOCTYPE html>
+<head>
+    <title>New thread</title>
+</head>
 <body>
+    <div class="top-bar">
+        <h1>
+            <a href="index.html">
+                My Forum
+            </a>
+        </h1>
+        <div class="main">
+            <div class="new-thread-title">
+                <input class="thread-title-input" placeholder="Enter thread title"></input>
+                <input class="thread-author-input" placeholder="Enter your name"></input>
+            </div>
+            <div class="new-thread-content">
+                <textarea class="thread-content-textarea" placeholder="Enter thread content"></textarea>
+            </div>
+            <div class="new-thread-button">
+                <button class="button submit">Submit</button>
+            </div>
+        </div>
+    </div>
+    <script>
+    //needed this to check our inputs again
+    String.prototype.isWhitespace = function()
+    {
+        var match = this.match(/\s*/);
+
+        if(match == null)
+        {
+            return false;
+        }
+        
+        return match[0] == this;
+    }
+
+    var threads = JSON.parse(localStorage.getItem('threads')); //get all threads
+    var newId = threads.length; //probably should do this when click button so we get latest id. will be a issue when website is live and multiple people use it at the same time 
+
     
+    //Get our button
+    var submitBtn = document.getElementsByClassName("submit")[0];
+    submitBtn.addEventListener('click', function() //when we click submit do this code below
+    {
+        //Get our elements
+        var newName = document.getElementsByClassName("thread-author-input")[0];
+        var newTitle = document.getElementsByClassName("thread-title-input")[0];
+        var newContent = document.getElementsByClassName("thread-content-textarea")[0];
+
+        if(newName.value.length <= 0)//this so people can't make threads that are empty
+                return;
+
+        if(newName.value.isWhitespace())
+            return;
+
+        if(newTitle.value.length <= 0)
+            return;
+
+        if(newTitle.value.isWhitespace())
+            return;
+
+        if(newContent.value.length <= 0)
+            return;
+
+        if(newContent.value.isWhitespace())
+            return;
+    
+            //Making new thread
+        threads[newId] = //we count from 0 when indexing
+        {
+            id: newId + 1, //saving the values for new thread
+            title: newTitle.value, 
+            author: newName.value,
+            date: Date.now(),
+            content: newContent.value,
+            comments: []
+        }
+
+
+        localStorage.setItem('threads', JSON.stringify(threads)); //Saving to storage
+
+        location.href ="thread.html?" + (newId + 1); //move our page to the new thread we just created
+    })
+    </script>
+    
+    
+    <style>            
+    body {
+        margin: 10px 60px;
+    }
+    a {
+        text-decoration: none;
+        color: black;
+    }
+    h1, h4, ol {
+        margin: 0;
+    }
+    p {
+        margin: 5px 0;
+    }
+    .top-bar {
+        background-color: skyblue;
+        padding: 0 40px;
+    }
+    .main {
+        background-color: #F6F6EF;
+        padding: 10px 15px;
+        height: 100%;
+    }
+    .row {
+        padding: 5px 0;
+    }
+    .bottom {
+        display: flex;
+        color: grey;
+        font-size: 12px;
+    }
+    .timestamp {
+        padding-right: 10px;
+    }
+    .new-thread{
+        position: fixed;
+        top: 17px;
+        right: 0;
+        margin-right: 65px;
+    }
+    .new-thread-content{
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .thread-content-textarea{
+        width: 25% ;
+    }
+    .button {
+        text-align: center;
+    }
+    </style>
 </body>

@@ -1,7 +1,12 @@
 <body>
+    <head>
+        <title>DK's forum</title>
+    </head>
     <div class="top-bar">
         <h1>
-            My Forum
+            <a href="index.html">
+                My Forum
+            </a>
         </h1>
     </div>
     <div class="main">
@@ -10,7 +15,6 @@
         <div><textarea placeholder="Enter your Name" class="nameInput"></textarea></div>
         <div><textarea placeholder="Enter your Comment" class="commentInput"></textarea></div>
         <div><button>Add comment</button></div>
-        <div><button class="clr-button">Clear</button></div>
         <div class="comments">
         </div>
     </div>
@@ -33,10 +37,16 @@
         var thread = threads.find(t => t.id == id);
         var header = document.querySelector('.header');
         var headerHtml = `
-            <h4 class="title">
-                ${thread.title}
-            </h4>
+            <div>
+                <h3 class="title">
+                    ${thread.title}
+                </h3>
+            </div>
+            <p class="content">
+                ${thread.content}    
+            </p>
             <div class="bottom">
+                <p class="author-text">by ${thread.author}</p>
                 <p class="timestamp">
                     ${new Date(thread.date).toLocaleString()}
                 </p>
@@ -70,13 +80,6 @@
         for (let comment of thread.comments) {
             addComment(comment);
         }
-
-        var clearBtn = document.getElementsByClassName("clr-button")[0];
-        clearBtn.addEventListener('click', function() {
-            localStorage.clear();
-            sessionStorage.clear();
-            location.reload();
-        })
 
         var btn = document.querySelector('button');
         btn.addEventListener('click', function() {
@@ -118,7 +121,7 @@ a {
     text-decoration: none;
     color: black;
 }
-h1, h4, ol {
+h1,h3, h4, ol {
     margin: 0;
 }
 p {
@@ -169,6 +172,11 @@ button {
 }
 .comment-ts {
     padding-left: 10px;
+}.author-text{
+    margin-right: 10px;
+}.content{
+    margin-top: 15px;
+    margin-bottom: 10px;
 }
 </style>
 </body>
