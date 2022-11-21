@@ -1,21 +1,18 @@
 <body>
-    <head>
-        <title>DK's forum</title>
-    </head>
     <div class="top-bar">
         <h1>
-            <a href="index.html">
-                My Forum
-            </a>
+            <a href="index.html">My Forum</a>
         </h1>
     </div>
     <div class="main">
         <div class="header">
         </div>
+        <div><button class="thread-reply">Reply to Thread</button></div>
         <div><textarea placeholder="Enter your Name" class="nameInput"></textarea></div>
         <div><textarea placeholder="Enter your Comment" class="commentInput"></textarea></div>
         <div><button>Add comment</button></div>
-        <div class="comments">
+        <div><button class="clr-button">Clear</button></div>
+        <div class="comments"> <button>Reply</button>
         </div>
     </div>
     <script src="data.js"></script>
@@ -46,7 +43,6 @@
                 ${thread.content}    
             </p>
             <div class="bottom">
-                <p class="author-text">by ${thread.author}</p>
                 <p class="timestamp">
                     ${new Date(thread.date).toLocaleString()}
                 </p>
@@ -80,6 +76,13 @@
         for (let comment of thread.comments) {
             addComment(comment);
         }
+
+        var clearBtn = document.getElementsByClassName("clr-button")[0];
+        clearBtn.addEventListener('click', function() {
+            localStorage.clear();
+            sessionStorage.clear();
+            location.reload();
+        })
 
         var btn = document.querySelector('button');
         btn.addEventListener('click', function() {
@@ -121,7 +124,7 @@ a {
     text-decoration: none;
     color: black;
 }
-h1,h3, h4, ol {
+h1, h4, ol {
     margin: 0;
 }
 p {
@@ -172,11 +175,16 @@ button {
 }
 .comment-ts {
     padding-left: 10px;
-}.author-text{
-    margin-right: 10px;
-}.content{
-    margin-top: 15px;
-    margin-bottom: 10px;
 }
+/*textarea.ReplyCommentName{
+
+}
+textarea.ReplyCommentComment{
+            var threadreply = document.getElementsByClassName("thread-reply")[0]
+            threadreply.addEventListener('click', function()
+            I will remove the text areas and make button called "Reply to Thread". Once you click the button the text areas pop up and you can write your comment
+            )
+}
+*/
 </style>
 </body>
