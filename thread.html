@@ -7,12 +7,11 @@
     <div class="main">
         <div class="header">
         </div>
-        <div><button class="thread-reply">Reply to Thread</button></div>
-        <div><textarea placeholder="Enter your Name" class="nameInput"></textarea></div>
-        <div><textarea placeholder="Enter your Comment" class="commentInput"></textarea></div>
-        <div><button>Add comment</button></div>
+        <div><button>Publish Comment</button></div>
+        <div><button onclick="divGoneYes()" id="buttongone">New Comment</button></div>
+        <p id="divGoneYes2">
         <div><button class="clr-button">Clear</button></div>
-        <div class="comments"> <button>Reply</button>
+        <div class="comments"> <button>Reply to Comment</button>
         </div>
     </div>
     <script src="data.js"></script>
@@ -113,8 +112,13 @@
 
             var commentDiv = document.getElementsByClassName("comment-count")[0];
             commentDiv.innerHTML = thread.comments.length + " comments";
-
         })
+            function divGoneYes() {
+                document.getElementById("divGoneYes2").insertAdjacentHTML("afterend",
+                '<div><textarea placeholder="Enter your Name" class="nameInput"></textarea></div>' + 
+                '<div><textarea placeholder="Enter your Comment" class="commentInput"></textarea></div>');
+                document.getElementById('buttongone').style.display= 'none';
+            }
     </script>
 <style>
 body {
